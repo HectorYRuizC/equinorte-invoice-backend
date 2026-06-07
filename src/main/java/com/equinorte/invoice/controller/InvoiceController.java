@@ -34,6 +34,11 @@ public class InvoiceController {
         return service.recalculate(request);
     }
 
+    @PostMapping("/recalculate/apply")
+    public InvoiceResponse apply(@RequestBody @Valid RecalculateRequest request) {
+        return service.applyRecalculation(request);
+    }
+
     @GetMapping
     public List<InvoiceSummaryResponse> findAll() {
         return service.findAll();

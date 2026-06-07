@@ -91,19 +91,13 @@ public class InvoiceService {
     }
 
 
-    public RecalculateResponse recalculate(RecalculateRequest request) {
 
-        Invoice invoice = repository.findById(request.invoiceId())
-                .orElseThrow(() -> new BusinessException("Invoice not found"));
+    private RecalculationResult calculateInvoice(Invoice invoice, BigDecimal newSubtotal, boolean applyChanges) {
 
         BigDecimal oldSubtotal = invoice.getSubtotal();
-        BigDecimal newSubtotal = request.newSubtotal();
-
-        validateUserLimit(request.userType(), oldSubtotal, newSubtotal);
-
         BigDecimal factor = newSubtotal.divide(oldSubtotal, 4, RoundingMode.HALF_UP);
 
-        List<InvoiceDetailResponse> newDetails = new ArrayList<>();
+        List<InvoiceDetailResponse> responseDetails = new ArrayList<>();
         BigDecimal totalIva = BigDecimal.ZERO;
 
         for (InvoiceDetail d : invoice.getDetails()) {
@@ -114,7 +108,13 @@ public class InvoiceService {
 
             totalIva = totalIva.add(iva);
 
-            newDetails.add(new InvoiceDetailResponse(
+            if (applyChanges) {
+                d.setPrice(newPrice);
+                d.setIva(iva);
+                d.setTotal(total);
+            }
+
+            responseDetails.add(new InvoiceDetailResponse(
                     d.getProductName(),
                     newPrice,
                     iva,
@@ -124,14 +124,54 @@ public class InvoiceService {
 
         BigDecimal finalTotal = newSubtotal.add(totalIva);
 
+        return new RecalculationResult(totalIva, finalTotal, responseDetails);
+    }
+
+
+
+    public RecalculateResponse recalculate(RecalculateRequest request) {
+
+        Invoice invoice = repository.findById(request.invoiceId())
+                .orElseThrow(() -> new BusinessException("Invoice not found"));
+
+        BigDecimal oldSubtotal = invoice.getSubtotal();
+        BigDecimal newSubtotal = request.newSubtotal();
+
+        validateUserLimit(request.userType(), oldSubtotal, newSubtotal);
+
+        RecalculationResult result = calculateInvoice(invoice, newSubtotal, false);
+
         return new RecalculateResponse(
                 oldSubtotal,
                 newSubtotal,
-                totalIva,
-                finalTotal,
-                newDetails
+                result.totalIva(),
+                result.finalTotal(),
+                result.details()
         );
     }
+
+
+    public InvoiceResponse applyRecalculation(RecalculateRequest request) {
+
+        Invoice invoice = repository.findById(request.invoiceId())
+                .orElseThrow(() -> new BusinessException("Invoice not found"));
+
+        BigDecimal oldSubtotal = invoice.getSubtotal();
+        BigDecimal newSubtotal = request.newSubtotal();
+
+        validateUserLimit(request.userType(), oldSubtotal, newSubtotal);
+
+        RecalculationResult result = calculateInvoice(invoice, newSubtotal, true);
+
+        invoice.setSubtotal(newSubtotal);
+        invoice.setTotalIva(result.totalIva());
+        invoice.setTotal(result.finalTotal());
+
+        repository.save(invoice);
+
+        return mapToResponse(invoice);
+    }
+
 
 
     private void validateUserLimit(UserType userType, BigDecimal oldSubtotal, BigDecimal newSubtotal) {
@@ -187,4 +227,15 @@ public class InvoiceService {
     }
 
 
+
+
+    private record RecalculationResult(
+            BigDecimal totalIva,
+            BigDecimal finalTotal,
+            List<InvoiceDetailResponse> details
+    ) {}
+
+
 }
+
+
