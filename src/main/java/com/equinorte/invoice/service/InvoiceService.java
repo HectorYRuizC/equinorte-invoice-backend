@@ -5,6 +5,7 @@ import com.equinorte.invoice.dto.request.InvoiceRequest;
 import com.equinorte.invoice.dto.request.RecalculateRequest;
 import com.equinorte.invoice.dto.response.InvoiceDetailResponse;
 import com.equinorte.invoice.dto.response.InvoiceResponse;
+import com.equinorte.invoice.dto.response.InvoiceSummaryResponse;
 import com.equinorte.invoice.dto.response.RecalculateResponse;
 import com.equinorte.invoice.entity.Invoice;
 import com.equinorte.invoice.entity.InvoiceDetail;
@@ -171,6 +172,18 @@ public class InvoiceService {
                 invoice.getTotal(),
                 details
         );
+    }
+
+    public List<InvoiceSummaryResponse> findAll() {
+        return repository.findAll()
+                .stream()
+                .map(i -> new InvoiceSummaryResponse(
+                        i.getId(),
+                        i.getTotal(),
+                        i.getTotalIva(),
+                        i.getSubtotal()
+                ))
+                .toList();
     }
 
 

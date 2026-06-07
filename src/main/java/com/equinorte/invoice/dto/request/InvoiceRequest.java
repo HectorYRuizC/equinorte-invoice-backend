@@ -1,10 +1,12 @@
 package com.equinorte.invoice.dto.request;
 
-import com.equinorte.invoice.enums.UserType;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 
 public record InvoiceRequest(
-        List<InvoiceDetailRequest> details,
-        UserType userType
+        @NotEmpty(message = "Invoice must contain at least one detail")
+        List<@Valid InvoiceDetailRequest> details
 ) {}
