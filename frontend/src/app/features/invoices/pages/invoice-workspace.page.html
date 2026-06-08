@@ -1,0 +1,111 @@
+<header class="topbar">
+  <div class="brand">
+    <div class="mark">E</div>
+    <div>
+      <strong>Equinorte</strong>
+      <span>Gestión de facturas</span>
+    </div>
+  </div>
+  <div class="status"><i></i> Servicio activo</div>
+</header>
+
+<main>
+  <div class="page-title">
+    <div>
+      <span>Facturación</span>
+      <h1>Recálculo de valores</h1>
+    </div>
+    <p>{{ invoices().length }} facturas disponibles</p>
+  </div>
+
+  @if (message()) {
+    <div class="alert" [class.success]="messageType() === 'success'">
+      <span>{{ message() }}</span>
+      <button type="button" aria-label="Cerrar mensaje" (click)="message.set('')">×</button>
+    </div>
+  }
+
+  <section class="workspace">
+    <app-invoice-list
+      [invoices]="invoices()"
+      [selectedId]="invoice()?.id ?? null"
+      (selected)="selectInvoice($event)"
+    />
+
+    <div class="content">
+      @if (loading()) {
+        <div class="loader">
+          <i></i>
+          <span>Cargando factura</span>
+        </div>
+      } @else if (invoice(); as selectedInvoice) {
+        <app-invoice-detail [invoice]="selectedInvoice" />
+      } @else {
+        <div class="loader">No hay facturas disponibles.</div>
+      }
+    </div>
+
+    <aside class="recalculation">
+      <div class="panel-heading">
+        <span>Recálculo</span>
+        <h2>Ajustar subtotal</h2>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="calculate()">
+        <label>
+          Tipo de usuario
+          <select formControlName="userType" (change)="resetPreview()">
+            <option value="TYPE_A">Tipo A · Operador</option>
+            <option value="TYPE_B">Tipo B · Supervisor</option>
+          </select>
+        </label>
+
+        <label>
+          Nuevo subtotal
+          <div class="money-field">
+            <span>$</span>
+            <input
+              type="number"
+              formControlName="newSubtotal"
+              min="0.01"
+              step="1000"
+              (input)="resetPreview()"
+            />
+          </div>
+        </label>
+        @if (form.controls.newSubtotal.touched && form.controls.newSubtotal.invalid) {
+          <small class="field-error">Ingresa un valor mayor que cero.</small>
+        }
+
+        <div class="limit">
+          <div>
+            <span>Aumento permitido</span>
+            <strong>+{{ allowedIncrease() | currency: 'COP' : '$' : '1.0-0' }}</strong>
+          </div>
+          <div>
+            <span>Subtotal máximo</span>
+            <strong>{{ maximumSubtotal() | currency: 'COP' : '$' : '1.0-0' }}</strong>
+          </div>
+        </div>
+
+        <button class="calculate" type="submit" [disabled]="calculating() || !invoice()">
+          {{ calculating() ? 'Calculando...' : 'Previsualizar recálculo' }}
+        </button>
+      </form>
+
+      <div class="rule">
+        <i>i</i>
+        <p>Los productos se ajustan proporcionalmente y el IVA se calcula nuevamente.</p>
+      </div>
+    </aside>
+  </section>
+
+  @if (preview(); as result) {
+    <app-recalculation-preview
+      [preview]="result"
+      [saving]="saving()"
+      (closed)="preview.set(null)"
+      (confirmed)="apply()"
+    />
+  }
+</main>

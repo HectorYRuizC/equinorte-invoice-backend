@@ -1,0 +1,151 @@
+.preview {
+  overflow: hidden;
+  border: 1px solid #d8e0d9;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 18px 40px rgb(22 42 29 / 10%);
+}
+
+.preview-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 24px 18px;
+}
+
+.preview-heading span {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 4px 0 0;
+  font: 700 19px/1.1 var(--font-display);
+}
+
+.close {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 7px;
+  color: #718077;
+  background: #f0f3f0;
+  cursor: pointer;
+  font-size: 19px;
+}
+
+.change {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 18px;
+  margin: 0 24px 20px;
+  padding: 13px 16px;
+  border-radius: 9px;
+  background: #f2f5f1;
+}
+
+.change div:last-child {
+  text-align: right;
+}
+
+.change small,
+.change strong {
+  display: block;
+}
+
+.change small {
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.change strong {
+  font: 700 14px/1 var(--font-display);
+}
+
+.change span {
+  color: #9ba59d;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 11px 24px;
+  border-bottom: 1px solid #edf0ed;
+  font-size: 11px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+th {
+  color: var(--muted);
+  background: #fafbfa;
+  font-size: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+td:first-child {
+  max-width: 300px;
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+}
+
+tfoot td {
+  border: 0;
+  color: #fff;
+  background: var(--green);
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 18px 24px;
+}
+
+.actions button {
+  min-height: 40px;
+  padding: 0 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.secondary {
+  border: 1px solid var(--line);
+  color: #526158;
+  background: #fff;
+}
+
+.primary {
+  border: 1px solid var(--lime);
+  color: #173321;
+  background: var(--lime);
+}
+
+.primary:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
