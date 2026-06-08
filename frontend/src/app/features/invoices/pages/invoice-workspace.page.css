@@ -5,7 +5,8 @@
   align-items: center;
   justify-content: space-between;
   color: #fff;
-  background: var(--green);
+  background: var(--navy);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 8%) inset;
 }
 
 .brand {
@@ -20,9 +21,10 @@
   display: grid;
   place-items: center;
   border-radius: 8px;
-  color: var(--green);
-  background: var(--lime);
+  color: #fff;
+  background: var(--brand);
   font: 800 19px/1 var(--font-display);
+  box-shadow: 0 8px 18px rgb(255 90 31 / 24%);
 }
 
 .brand strong,
@@ -36,7 +38,7 @@
 
 .brand span {
   margin-top: 2px;
-  color: #a9bbae;
+  color: #b9c7d6;
   font-size: 9px;
 }
 
@@ -44,7 +46,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  color: #b9c8bd;
+  color: #c8d2dd;
   font-size: 10px;
 }
 
@@ -52,8 +54,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--lime);
-  box-shadow: 0 0 0 4px rgb(198 231 65 / 12%);
+  background: var(--brand);
+  box-shadow: 0 0 0 4px rgb(255 90 31 / 14%);
 }
 
 main {
@@ -71,7 +73,7 @@ main {
 
 .page-title span,
 .panel-heading span {
-  color: #77857c;
+  color: var(--brand-dark);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.8px;
@@ -81,7 +83,8 @@ main {
 .page-title h1 {
   margin: 5px 0 0;
   font: 750 28px/1 var(--font-display);
-  letter-spacing: -1px;
+  color: var(--navy);
+  letter-spacing: -0.4px;
 }
 
 .page-title p {
@@ -98,15 +101,15 @@ main {
   justify-content: space-between;
   border: 1px solid #ead6d2;
   border-radius: 8px;
-  color: #82483f;
+  color: #9f3a1d;
   background: #fff4f1;
   font-size: 11px;
 }
 
 .alert.success {
-  border-color: #d6e5d8;
-  color: #3c6647;
-  background: #eff8f0;
+  border-color: #cfe7d8;
+  color: #226042;
+  background: #eefaf3;
 }
 
 .alert button {
@@ -124,8 +127,8 @@ main {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 16px 40px rgb(20 42 27 / 6%);
+  background: var(--surface);
+  box-shadow: 0 18px 46px rgb(36 54 75 / 10%);
 }
 
 .content {
@@ -147,7 +150,7 @@ main {
   width: 22px;
   height: 22px;
   border: 2px solid #e1e7e2;
-  border-top-color: var(--green);
+  border-top-color: var(--brand);
   border-radius: 50%;
   animation: spin 700ms linear infinite;
 }
@@ -159,7 +162,7 @@ main {
 .recalculation {
   padding: 25px 22px;
   border-left: 1px solid var(--line);
-  background: #fbfcfb;
+  background: #fffaf7;
 }
 
 .panel-heading {
@@ -199,8 +202,8 @@ select {
 
 input:focus,
 select:focus {
-  border-color: #819a86;
-  box-shadow: 0 0 0 3px rgb(76 106 84 / 8%);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgb(255 90 31 / 12%);
 }
 
 .money-field {
@@ -230,7 +233,7 @@ select:focus {
   gap: 10px;
   padding: 13px;
   border-radius: 8px;
-  background: #edf1ed;
+  background: var(--brand-soft);
 }
 
 .limit div {
@@ -252,8 +255,8 @@ select:focus {
   min-height: 43px;
   border: 0;
   border-radius: 8px;
-  color: #193522;
-  background: var(--lime);
+  color: #fff;
+  background: var(--brand);
   cursor: pointer;
   font-size: 11px;
   font-weight: 800;
@@ -261,7 +264,7 @@ select:focus {
 }
 
 .calculate:hover {
-  background: #b8db32;
+  background: var(--brand-dark);
   transform: translateY(-1px);
 }
 
@@ -286,8 +289,8 @@ select:focus {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  color: #66766b;
-  background: #e6ebe7;
+  color: var(--brand-dark);
+  background: var(--brand-soft);
   font: normal 700 9px/1 Arial;
 }
 

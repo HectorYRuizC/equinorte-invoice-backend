@@ -3,7 +3,7 @@
   min-height: 560px;
   padding: 18px 12px;
   border-right: 1px solid var(--line);
-  background: #f7f8f6;
+  background: #f7f9fc;
 }
 
 .list-header {
@@ -23,7 +23,7 @@ h2 {
   padding: 4px 7px;
   border-radius: 20px;
   color: var(--muted);
-  background: #e7ebe7;
+  background: var(--navy-soft);
   font-size: 10px;
   font-weight: 700;
   text-align: center;
@@ -49,12 +49,13 @@ h2 {
 
 .invoice-item:hover {
   background: #fff;
+  box-shadow: 0 8px 18px rgb(36 54 75 / 6%);
 }
 
 .invoice-item.active {
-  border-color: #d9e1d9;
+  border-color: #ffd7c2;
   background: #fff;
-  box-shadow: 0 8px 20px rgb(24 45 31 / 6%);
+  box-shadow: 0 10px 24px rgb(255 90 31 / 10%);
 }
 
 .invoice-item.active::before {
@@ -64,7 +65,7 @@ h2 {
   left: -1px;
   width: 3px;
   border-radius: 0 3px 3px 0;
-  background: var(--lime);
+  background: var(--brand);
   content: '';
 }
 

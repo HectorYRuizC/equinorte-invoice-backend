@@ -29,8 +29,8 @@ h2 {
   gap: 7px;
   padding: 7px 10px;
   border-radius: 20px;
-  color: #44604d;
-  background: #edf3ee;
+  color: var(--brand-dark);
+  background: var(--brand-soft);
   font-size: 10px;
   font-weight: 700;
 }
@@ -39,7 +39,7 @@ h2 {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #75a17e;
+  background: var(--brand);
 }
 
 .totals {
@@ -73,13 +73,13 @@ h2 {
 }
 
 .totals .total {
-  border-color: var(--green);
+  border-color: var(--brand);
   color: #fff;
-  background: var(--green);
+  background: linear-gradient(135deg, var(--brand), var(--brand-dark));
 }
 
 .totals .total small {
-  color: #abc0b0;
+  color: #ffe2d3;
 }
 
 .table-wrap {
@@ -115,7 +115,7 @@ td {
 
 td:first-child {
   max-width: 330px;
-  color: #35463a;
+  color: var(--navy);
   font-weight: 600;
 }
 

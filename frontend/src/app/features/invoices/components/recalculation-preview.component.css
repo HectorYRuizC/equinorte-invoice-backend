@@ -1,9 +1,9 @@
 .preview {
   overflow: hidden;
-  border: 1px solid #d8e0d9;
+  border: 1px solid var(--line);
   border-radius: 14px;
   background: #fff;
-  box-shadow: 0 18px 40px rgb(22 42 29 / 10%);
+  box-shadow: 0 18px 40px rgb(36 54 75 / 12%);
 }
 
 .preview-heading {
@@ -31,8 +31,8 @@ h2 {
   height: 30px;
   border: 0;
   border-radius: 7px;
-  color: #718077;
-  background: #f0f3f0;
+  color: var(--navy);
+  background: var(--surface-soft);
   cursor: pointer;
   font-size: 19px;
 }
@@ -45,7 +45,7 @@ h2 {
   margin: 0 24px 20px;
   padding: 13px 16px;
   border-radius: 9px;
-  background: #f2f5f1;
+  background: var(--brand-soft);
 }
 
 .change div:last-child {
@@ -113,7 +113,7 @@ td:first-child {
 tfoot td {
   border: 0;
   color: #fff;
-  background: var(--green);
+  background: var(--navy);
   font-weight: 700;
 }
 
@@ -135,14 +135,14 @@ tfoot td {
 
 .secondary {
   border: 1px solid var(--line);
-  color: #526158;
+  color: var(--navy);
   background: #fff;
 }
 
 .primary {
-  border: 1px solid var(--lime);
-  color: #173321;
-  background: var(--lime);
+  border: 1px solid var(--brand);
+  color: #fff;
+  background: var(--brand);
 }
 
 .primary:disabled {
